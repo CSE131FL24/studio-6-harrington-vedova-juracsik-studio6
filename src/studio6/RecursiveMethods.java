@@ -1,5 +1,7 @@
 package studio6;
 
+import java.awt.Color;
+
 import edu.princeton.cs.introcs.StdDraw;
 
 public class RecursiveMethods {
@@ -14,8 +16,13 @@ public class RecursiveMethods {
 	public static double geometricSum(int n) {
 		
 			// FIXME compute the geometric sum for the first n terms recursively
-			return 0;
+			
+		double sum = 0;
 		
+		for(double i = 1; i <= n; i++) {
+			sum += (1/(Math.pow(2, i)));
+		}
+		return sum;
 	}
 	
 	/**
@@ -30,6 +37,16 @@ public class RecursiveMethods {
 	public static void circlesUponCircles(double xCenter, double yCenter, double radius,
 			double radiusMinimumDrawingThreshold) {
 		
+		if (radius < radiusMinimumDrawingThreshold) {
+			return;
+		}
+			
+		StdDraw.circle(xCenter, yCenter, radius);
+		int n = 3;
+		circlesUponCircles(xCenter + radius, yCenter, radius / n, radiusMinimumDrawingThreshold);
+		circlesUponCircles(xCenter, yCenter + radius, radius / n, radiusMinimumDrawingThreshold);
+		circlesUponCircles(xCenter, yCenter - radius, radius / n, radiusMinimumDrawingThreshold);
+		circlesUponCircles(xCenter - radius, yCenter, radius / n, radiusMinimumDrawingThreshold);
 		// FIXME
 	}
 
@@ -42,9 +59,17 @@ public class RecursiveMethods {
 	public static int[] toReversed(int[] array) {
 		
 			// FIXME create a helper method that can recursively reverse the given array
-			return new int[0];
+		int n = 0;
+		int[] swappedArray = new int[array.length];
+		helperMethod(n, swappedArray, array);
+		return new int[0];
 		
 	}
+	public static int[] helperMethod(int n, int[] swappedArray, int[] array) {
+		swappedArray[n] = array[array.length - 1 - n];
+		return new int[0];
+	}
+	
 	
 	/**
 	 * This method uses recursion to compute the greatest common divisor
@@ -60,5 +85,5 @@ public class RecursiveMethods {
 			return 0;
 		
 	}
-
+	
 }
